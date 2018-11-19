@@ -6,7 +6,6 @@
   const RIGHT_ARROW = 39;
 
   const inReverse = -1;
-  // const toTheRight = 1;
 
   let currentScreen = 0;
 
@@ -21,7 +20,7 @@
   screens.push(document.querySelector(`#game-3`));
   screens.push(document.querySelector(`#stats`));
 
-  const warp = ((it) => {
+  const wrap = ((it) => {
     const shadow = document.createElement(`div`);
     const content = it.content.cloneNode(true);
     shadow.appendChild(content);
@@ -36,7 +35,7 @@
 
   const showScreen = (screenNumber) => {
     clearElement(main);
-    main.appendChild(warp(screens[screenNumber]));
+    main.appendChild(wrap(screens[screenNumber]));
   };
 
   const nextScreen = (direction = 1) => {
