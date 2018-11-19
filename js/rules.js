@@ -36,7 +36,7 @@ const rules = getElementFromTemlate(template);
 const rulesInput = rules.querySelector(`.rules__input`);
 const rulesButton = rules.querySelector(`.rules__button`);
 
-rulesInput.addEventListener(`keyup`, (evt) => {
+rulesInput.addEventListener(`keyup`, () => {
   if (rulesInput.value) {
     rulesButton.disabled = false;
   } else {
