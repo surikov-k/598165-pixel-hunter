@@ -45,15 +45,19 @@ const template = `<header class="header">
         <li class="stats__result stats__result--unknown"></li>
       </ul>
     </section>`;
+
 const gameThree = getElementFromTemlate(template);
 
-gameThree.querySelector(`.game__content`).addEventListener(`click`, (evt) => {
-  if (evt.target.alt.startsWith(`Option`)) {
+const gameOptions = gameThree.querySelectorAll(`.game__option`);
+gameOptions.forEach((it) => {
+  it.addEventListener(`click`, () => {
     showScreen(stats);
-  }
+  });
 });
+
 
 gameThree.querySelector(`.back`).addEventListener(`click`, () => {
   showScreen(greeting);
 });
+
 export default gameThree;

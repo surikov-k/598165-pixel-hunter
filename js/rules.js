@@ -37,11 +37,7 @@ const rulesInput = rules.querySelector(`.rules__input`);
 const rulesButton = rules.querySelector(`.rules__button`);
 
 rulesInput.addEventListener(`keyup`, () => {
-  if (rulesInput.value) {
-    rulesButton.disabled = false;
-  } else {
-    rulesButton.disabled = true;
-  }
+  rulesButton.disabled = !rulesInput.value;
 });
 
 rulesButton.addEventListener(`click`, (evt) => {

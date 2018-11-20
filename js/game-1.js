@@ -60,15 +60,30 @@ const template = `<header class="header">
     </section>`;
 
 const gameOne = getElementFromTemlate(template);
-const gameOptions = gameOne.querySelectorAll(`.game__option`);
 
-gameOne.querySelector(`.game__content`).addEventListener(`click`, () => {
-  const firstGameChecked = gameOptions[0].querySelectorAll(`input[type="radio"]:checked`).length;
-  const secondGameChecked = gameOptions[1].querySelectorAll(`input[type="radio"]:checked`).length;
+const gameInputs = gameOne.querySelectorAll(`input[type="radio"]`);
 
-  if (firstGameChecked && secondGameChecked) {
-    showScreen(gameTwo);
-  }
+const gameStatus = {
+  question1: false,
+  question2: false
+};
+
+const resetInputs = () => {
+  gameInputs.forEach((it) => {
+    it.checked = false;
+  });
+  gameStatus.question1 = false;
+  gameStatus.question2 = false;
+};
+
+gameInputs.forEach((it) => {
+  it.addEventListener(`change`, (evt) => {
+    gameStatus[evt.target.name] = true;
+    if (gameStatus.question1 && gameStatus.question2) {
+      resetInputs();
+      showScreen(gameTwo);
+    }
+  });
 });
 
 gameOne.querySelector(`.back`).addEventListener(`click`, () => {

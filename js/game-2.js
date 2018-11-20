@@ -49,15 +49,23 @@ const template = `<header class="header">
     </section>`;
 
 const gameTwo = getElementFromTemlate(template);
+const gameInputs = gameTwo.querySelectorAll(`input[type="radio"]`);
 
-gameTwo.querySelector(`.game__content`).addEventListener(`click`, () => {
-  const gameAnswerChecked = gameTwo.querySelectorAll(`input[type="radio"]:checked`).length;
-  if (gameAnswerChecked) {
+const resetInputs = () => {
+  gameInputs.forEach((it) => {
+    it.checked = false;
+  });
+};
+
+gameInputs.forEach((it) => {
+  it.addEventListener(`change`, () => {
+    resetInputs();
     showScreen(gameThree);
-  }
+  });
 });
 
 gameTwo.querySelector(`.back`).addEventListener(`click`, () => {
   showScreen(greeting);
 });
+
 export default gameTwo;
