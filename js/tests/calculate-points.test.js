@@ -1,16 +1,8 @@
 import {assert} from 'chai';
 import calculatePoints from '../calculate-points';
+import {TOTAL_LIVES, TOTAL_QUESTIONS} from '../calculate-points';
 
-const mockAnswers = (answersNumber) => {
-  const answers = [];
-  for (let i = 0; i <= answersNumber - 1; ++i) {
-    answers[i] = {};
-    answers[i].correct = true;
-    answers[i].fast = false;
-    answers[i].slow = false;
-  }
-  return answers;
-};
+let answers = [];
 
 describe(`calculatePoints`, () => {
   it(`should return a number`, () => {
@@ -26,16 +18,65 @@ describe(`calculatePoints`, () => {
     assert.throws(() => calculatePoints([], `string`), /Second argument is not a number/);
   });
 
-  it(`should accept the second argument between 1 and 3`, () => {
-    assert.throws(() => calculatePoints([], 0), /Number of lives left is not between 1 and 3/);
-    assert.throws(() => calculatePoints([], 4), /Number of lives left is not between 1 and 3/);
+  it(`should accept the second argument between 0 and ${TOTAL_LIVES}`, () => {
+    assert.throws(() => calculatePoints([], -1), `Number of lives left is not between 0 and ${TOTAL_LIVES}`);
+    assert.throws(() => calculatePoints([], 6), `Number of lives left is not between 0 and ${TOTAL_LIVES}`);
   });
 
-  it(`should return -1 if number of answers is less than 10`, () => {
-    assert.equal(calculatePoints(mockAnswers(3), 3), -1);
+  it(`should return -1 if number of answers is less than ${TOTAL_QUESTIONS}`, () => {
+    answers = [
+      {correct: true, fast: false, slow: false},
+      {correct: true, fast: false, slow: false},
+      {correct: true, fast: false, slow: false}
+    ];
+    assert.equal(calculatePoints(answers, 3), -1);
   });
 
-  it(`should return 1150 if all questions are answered witn normal pace and 3 lives are left`, () => {
-    assert.equal(calculatePoints(mockAnswers(10), 3), 1150);
+  it(`should return 1150 if 10 questions are answered witn normal pace and 3 lives are left`, () => {
+    answers = [
+      {correct: true, fast: false, slow: false},
+      {correct: true, fast: false, slow: false},
+      {correct: true, fast: false, slow: false},
+      {correct: true, fast: false, slow: false},
+      {correct: true, fast: false, slow: false},
+      {correct: true, fast: false, slow: false},
+      {correct: true, fast: false, slow: false},
+      {correct: true, fast: false, slow: false},
+      {correct: true, fast: false, slow: false},
+      {correct: true, fast: false, slow: false}
+    ];
+    assert.equal(calculatePoints(answers, 3), 1150);
+  });
+
+  it(`should return 1650 if 10 questions are answered witn high pace and 3 lives are left`, () => {
+    answers = [
+      {correct: true, fast: true, slow: false},
+      {correct: true, fast: true, slow: false},
+      {correct: true, fast: true, slow: false},
+      {correct: true, fast: true, slow: false},
+      {correct: true, fast: true, slow: false},
+      {correct: true, fast: true, slow: false},
+      {correct: true, fast: true, slow: false},
+      {correct: true, fast: true, slow: false},
+      {correct: true, fast: true, slow: false},
+      {correct: true, fast: true, slow: false}
+    ];
+    assert.equal(calculatePoints(answers, 3), 1650);
+  });
+
+  it(`should return 200 if 7 questions are answered witn low pace and 3 lives are lost`, () => {
+    answers = [
+      {correct: false, fast: false, slow: true},
+      {correct: false, fast: false, slow: true},
+      {correct: false, fast: false, slow: true},
+      {correct: true, fast: false, slow: true},
+      {correct: true, fast: false, slow: true},
+      {correct: true, fast: false, slow: true},
+      {correct: true, fast: false, slow: true},
+      {correct: true, fast: false, slow: true},
+      {correct: true, fast: false, slow: true},
+      {correct: true, fast: false, slow: true}
+    ];
+    assert.equal(calculatePoints(answers, 0), 200);
   });
 });

@@ -1,3 +1,9 @@
+export const TOTAL_QUESTIONS = 10;
+export const TOTAL_LIVES = 3;
+const CORRECT_POINTS = 100;
+const FAST_BONUS = 50;
+const LIVES_BONUS = 50;
+const SLOW_PENALTY = 50;
 
 export default (answers, livesLeft) => {
   if (!Array.isArray(answers)) {
@@ -7,15 +13,15 @@ export default (answers, livesLeft) => {
     throw new Error(`Second argument is not a number`);
   }
 
-  if (livesLeft < 1 || livesLeft > 3) {
-    throw new Error(`Number of lives left is not between 1 and 3`);
+  if (livesLeft < 0 || livesLeft > TOTAL_LIVES) {
+    throw new Error(`Number of lives left is not between 0 and ${TOTAL_LIVES}`);
   }
-  if (answers.length < 10) {
+  if (answers.length < TOTAL_QUESTIONS) {
     return -1;
   }
   const pointsCount = answers.reduce((total, it) => {
-    return total + it.correct * 100 + it.fast * 50 - it.slow * 50;
-  }, 0) + livesLeft * 50;
+    return total + it.correct * CORRECT_POINTS + it.fast * FAST_BONUS - it.slow * SLOW_PENALTY;
+  }, 0) + livesLeft * LIVES_BONUS;
 
   return pointsCount;
 };
