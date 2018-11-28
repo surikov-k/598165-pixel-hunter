@@ -20,7 +20,10 @@ export default (answers, livesLeft) => {
     return -1;
   }
   const pointsCount = answers.reduce((total, it) => {
-    return total + it.correct * CORRECT_POINTS + it.fast * FAST_BONUS - it.slow * SLOW_PENALTY;
+    const forCorrectAnswer = it.correct ? CORRECT_POINTS : 0;
+    const forFastAnswer = it.fast ? FAST_BONUS : 0;
+    const forSlowAnswer = it.slow ? SLOW_PENALTY : 0;
+    return total + forCorrectAnswer + forFastAnswer - forSlowAnswer;
   }, 0) + livesLeft * LIVES_BONUS;
 
   return pointsCount;
