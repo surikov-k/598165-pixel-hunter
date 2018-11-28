@@ -18,9 +18,3 @@ export const showScreen = (screen) => {
   main.appendChild(screen);
 };
 
-// export const goToScreen = (screen) => {
-//   const backButton = document.querySelector(`.back`);
-//   backButton.addEventListener(`click`, () => {
-//     showScreen(screen);
-//   });
-// };
