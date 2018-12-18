@@ -1,7 +1,129 @@
 import {getElementFromTemlate, showScreen} from "./utils.js";
 import greeting from "./greeting.js";
+import {answers} from "./data/data.js";
+import levelStatistc from './level-statistic';
 
-const template = `<header class="header">
+
+// const template = `<header class="header">
+//       <button class="back">
+//         <span class="visually-hidden">Вернуться к началу</span>
+//         <svg class="icon" width="45" height="45" viewBox="0 0 45 45" fill="#000000">
+//           <use xlink:href="img/sprite.svg#arrow-left"></use>
+//         </svg>
+//         <svg class="icon" width="101" height="44" viewBox="0 0 101 44" fill="#000000">
+//           <use xlink:href="img/sprite.svg#logo-small"></use>
+//         </svg>
+//       </button>
+//     </header>
+//     <section class="result">
+//       <h2 class="result__title">Победа!</h2>
+//       <table class="result__table">
+//         <tr>
+//           <td class="result__number">1.</td>
+//           <td colspan="2">
+//             <ul class="stats">
+//               <li class="stats__result stats__result--wrong"></li>
+//               <li class="stats__result stats__result--slow"></li>
+//               <li class="stats__result stats__result--fast"></li>
+//               <li class="stats__result stats__result--correct"></li>
+//               <li class="stats__result stats__result--wrong"></li>
+//               <li class="stats__result stats__result--unknown"></li>
+//               <li class="stats__result stats__result--slow"></li>
+//               <li class="stats__result stats__result--unknown"></li>
+//               <li class="stats__result stats__result--fast"></li>
+//               <li class="stats__result stats__result--unknown"></li>
+//             </ul>
+//           </td>
+//           <td class="result__points">× 100</td>
+//           <td class="result__total">900</td>
+//         </tr>
+//         <tr>
+//           <td></td>
+//           <td class="result__extra">Бонус за скорость:</td>
+//           <td class="result__extra">1 <span class="stats__result stats__result--fast"></span></td>
+//           <td class="result__points">× 50</td>
+//           <td class="result__total">50</td>
+//         </tr>
+//         <tr>
+//           <td></td>
+//           <td class="result__extra">Бонус за жизни:</td>
+//           <td class="result__extra">2 <span class="stats__result stats__result--alive"></span></td>
+//           <td class="result__points">× 50</td>
+//           <td class="result__total">100</td>
+//         </tr>
+//         <tr>
+//           <td></td>
+//           <td class="result__extra">Штраф за медлительность:</td>
+//           <td class="result__extra">2 <span class="stats__result stats__result--slow"></span></td>
+//           <td class="result__points">× 50</td>
+//           <td class="result__total">-100</td>
+//         </tr>
+//         <tr>
+//           <td colspan="5" class="result__total  result__total--final">950</td>
+//         </tr>
+//       </table>
+//       <table class="result__table">
+//         <tr>
+//           <td class="result__number">2.</td>
+//           <td>
+//             <ul class="stats">
+//               <li class="stats__result stats__result--wrong"></li>
+//               <li class="stats__result stats__result--slow"></li>
+//               <li class="stats__result stats__result--fast"></li>
+//               <li class="stats__result stats__result--correct"></li>
+//               <li class="stats__result stats__result--wrong"></li>
+//               <li class="stats__result stats__result--unknown"></li>
+//               <li class="stats__result stats__result--slow"></li>
+//               <li class="stats__result stats__result--wrong"></li>
+//               <li class="stats__result stats__result--fast"></li>
+//               <li class="stats__result stats__result--wrong"></li>
+//             </ul>
+//           </td>
+//           <td class="result__total"></td>
+//           <td class="result__total  result__total--final">fail</td>
+//         </tr>
+//       </table>
+//       <table class="result__table">
+//         <tr>
+//           <td class="result__number">3.</td>
+//           <td colspan="2">
+//             <ul class="stats">
+//               <li class="stats__result stats__result--wrong"></li>
+//               <li class="stats__result stats__result--slow"></li>
+//               <li class="stats__result stats__result--fast"></li>
+//               <li class="stats__result stats__result--correct"></li>
+//               <li class="stats__result stats__result--wrong"></li>
+//               <li class="stats__result stats__result--unknown"></li>
+//               <li class="stats__result stats__result--slow"></li>
+//               <li class="stats__result stats__result--unknown"></li>
+//               <li class="stats__result stats__result--fast"></li>
+//               <li class="stats__result stats__result--unknown"></li>
+//             </ul>
+//           </td>
+//           <td class="result__points">× 100</td>
+//           <td class="result__total">900</td>
+//         </tr>
+//         <tr>
+//           <td></td>
+//           <td class="result__extra">Бонус за жизни:</td>
+//           <td class="result__extra">2 <span class="stats__result stats__result--alive"></span></td>
+//           <td class="result__points">× 50</td>
+//           <td class="result__total">100</td>
+//         </tr>
+//         <tr>
+//           <td colspan="5" class="result__total  result__total--final">950</td>
+//         </tr>
+//       </table>
+//     </section>`;
+// const stats = getElementFromTemlate(template);
+
+// stats.querySelector(`.back`).addEventListener(`click`, () => {
+//   showScreen([greeting]);
+// });
+// export default stats;
+
+export default () => {
+  let fianlStatsTemplate = `<header class="header">
       <button class="back">
         <span class="visually-hidden">Вернуться к началу</span>
         <svg class="icon" width="45" height="45" viewBox="0 0 45 45" fill="#000000">
@@ -14,107 +136,24 @@ const template = `<header class="header">
     </header>
     <section class="result">
       <h2 class="result__title">Победа!</h2>
-      <table class="result__table">
-        <tr>
-          <td class="result__number">1.</td>
+      <table class="result__table">`;
+
+  const reverseAnswers = answers.slice().reverse();
+
+  reverseAnswers.forEach((it, i) => {
+    fianlStatsTemplate += `<tr><td class="result__number">${i + 1}.</td>
           <td colspan="2">
-            <ul class="stats">
-              <li class="stats__result stats__result--wrong"></li>
-              <li class="stats__result stats__result--slow"></li>
-              <li class="stats__result stats__result--fast"></li>
-              <li class="stats__result stats__result--correct"></li>
-              <li class="stats__result stats__result--wrong"></li>
-              <li class="stats__result stats__result--unknown"></li>
-              <li class="stats__result stats__result--slow"></li>
-              <li class="stats__result stats__result--unknown"></li>
-              <li class="stats__result stats__result--fast"></li>
-              <li class="stats__result stats__result--unknown"></li>
-            </ul>
-          </td>
-          <td class="result__points">× 100</td>
-          <td class="result__total">900</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td class="result__extra">Бонус за скорость:</td>
-          <td class="result__extra">1 <span class="stats__result stats__result--fast"></span></td>
-          <td class="result__points">× 50</td>
-          <td class="result__total">50</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td class="result__extra">Бонус за жизни:</td>
-          <td class="result__extra">2 <span class="stats__result stats__result--alive"></span></td>
-          <td class="result__points">× 50</td>
-          <td class="result__total">100</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td class="result__extra">Штраф за медлительность:</td>
-          <td class="result__extra">2 <span class="stats__result stats__result--slow"></span></td>
-          <td class="result__points">× 50</td>
-          <td class="result__total">-100</td>
-        </tr>
-        <tr>
-          <td colspan="5" class="result__total  result__total--final">950</td>
-        </tr>
-      </table>
-      <table class="result__table">
-        <tr>
-          <td class="result__number">2.</td>
-          <td>
-            <ul class="stats">
-              <li class="stats__result stats__result--wrong"></li>
-              <li class="stats__result stats__result--slow"></li>
-              <li class="stats__result stats__result--fast"></li>
-              <li class="stats__result stats__result--correct"></li>
-              <li class="stats__result stats__result--wrong"></li>
-              <li class="stats__result stats__result--unknown"></li>
-              <li class="stats__result stats__result--slow"></li>
-              <li class="stats__result stats__result--wrong"></li>
-              <li class="stats__result stats__result--fast"></li>
-              <li class="stats__result stats__result--wrong"></li>
-            </ul>
-          </td>
-          <td class="result__total"></td>
-          <td class="result__total  result__total--final">fail</td>
-        </tr>
-      </table>
-      <table class="result__table">
-        <tr>
-          <td class="result__number">3.</td>
-          <td colspan="2">
-            <ul class="stats">
-              <li class="stats__result stats__result--wrong"></li>
-              <li class="stats__result stats__result--slow"></li>
-              <li class="stats__result stats__result--fast"></li>
-              <li class="stats__result stats__result--correct"></li>
-              <li class="stats__result stats__result--wrong"></li>
-              <li class="stats__result stats__result--unknown"></li>
-              <li class="stats__result stats__result--slow"></li>
-              <li class="stats__result stats__result--unknown"></li>
-              <li class="stats__result stats__result--fast"></li>
-              <li class="stats__result stats__result--unknown"></li>
-            </ul>
-          </td>
-          <td class="result__points">× 100</td>
-          <td class="result__total">900</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td class="result__extra">Бонус за жизни:</td>
-          <td class="result__extra">2 <span class="stats__result stats__result--alive"></span></td>
-          <td class="result__points">× 50</td>
-          <td class="result__total">100</td>
-        </tr>
-        <tr>
-          <td colspan="5" class="result__total  result__total--final">950</td>
-        </tr>
+            ${levelStatistc(it)}
+          </td></tr>`;
+  });
+  fianlStatsTemplate += `</tr>
       </table>
     </section>`;
-const stats = getElementFromTemlate(template);
 
-stats.querySelector(`.back`).addEventListener(`click`, () => {
-  showScreen(greeting);
-});
-export default stats;
+  const stats = getElementFromTemlate(fianlStatsTemplate);
+
+  stats.querySelector(`.back`).addEventListener(`click`, () => {
+    showScreen([greeting]);
+  });
+  return stats;
+};

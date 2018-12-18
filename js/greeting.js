@@ -24,6 +24,7 @@ const template = `<section class="greeting central--blur">
 const greeting = getElementFromTemlate(template);
 greeting.querySelector(`.greeting__continue`).addEventListener(`click`, (evt) => {
   evt.preventDefault();
-  showScreen(rules);
+  showScreen([rules]);
+  rules.querySelector(`.rules__input`).focus();
 });
 export default greeting;

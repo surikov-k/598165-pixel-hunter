@@ -13,8 +13,14 @@ export const getElementFromTemlate = (template) => {
   return wrapper;
 };
 
-export const showScreen = (screen) => {
+export const showScreen = (elems) => {
   clearElement(main);
-  main.appendChild(screen);
+  elems.forEach((it) => {
+    main.appendChild(it);
+  });
 };
 
+export const getRandomFromArray = (array) => {
+  const index = Math.floor(Math.random() * array.length);
+  return array[index];
+};

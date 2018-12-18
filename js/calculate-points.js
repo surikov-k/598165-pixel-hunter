@@ -1,9 +1,10 @@
-export const TOTAL_QUESTIONS = 10;
-export const TOTAL_LIVES = 3;
 const CORRECT_POINTS = 100;
 const FAST_BONUS = 50;
 const LIVES_BONUS = 50;
 const SLOW_PENALTY = 50;
+
+import {TOTAL_LIVES} from './data/data';
+import {TOTAL_QUESTIONS} from './data/data';
 
 export default (answers, livesLeft) => {
   if (!Array.isArray(answers)) {
