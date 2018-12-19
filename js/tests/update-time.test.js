@@ -1,6 +1,6 @@
 import {assert} from 'chai';
 
-import {INITIAL_STATE} from '../change-level';
+import {INITIAL_STATE} from '../data/data';
 import updateTime from '../update-time.js';
 
 const game = Object.assign({}, INITIAL_STATE);

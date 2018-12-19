@@ -1,4 +1,5 @@
-import {getElementFromTemlate, showScreen} from "./utils.js";
+import {getElementFromTemlate} from "./utils.js";
+import showScreen from './show-screen';
 import rules from "./rules.js";
 
 const template = `<section class="greeting central--blur">
@@ -24,6 +25,7 @@ const template = `<section class="greeting central--blur">
 const greeting = getElementFromTemlate(template);
 greeting.querySelector(`.greeting__continue`).addEventListener(`click`, (evt) => {
   evt.preventDefault();
-  showScreen(rules);
+  showScreen([rules]);
+  rules.querySelector(`.rules__input`).focus();
 });
 export default greeting;

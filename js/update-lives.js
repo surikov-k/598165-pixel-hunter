@@ -1,7 +1,7 @@
-export default (game, lives) => {
-  if (lives < 0) {
-    throw new Error(`The quantity of lives can't be a negative number`);
+export default (game) => {
+  if (game.lives - 1 < 0) {
+    throw new Error(`Player has died`);
   }
-  game.lives = lives;
+  game.lives -= 1;
   return game;
 };

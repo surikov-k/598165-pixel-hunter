@@ -1,7 +1,8 @@
-import {getElementFromTemlate, showScreen} from "./utils.js";
-import gameOne from "./game-1.js";
+import {getElementFromTemlate} from "./utils.js";
+import showScreen from './show-screen';
 import greeting from "./greeting.js";
-// import greeting from "./greeting.js";
+import showNextLevel from "./show-next-level.js";
+import {startNewGame} from "./start-new-game";
 
 const template = `<header class="header">
       <button class="back">
@@ -34,6 +35,7 @@ const template = `<header class="header">
 const rules = getElementFromTemlate(template);
 
 const rulesInput = rules.querySelector(`.rules__input`);
+
 const rulesButton = rules.querySelector(`.rules__button`);
 
 rulesInput.addEventListener(`keyup`, () => {
@@ -42,11 +44,12 @@ rulesInput.addEventListener(`keyup`, () => {
 
 rulesButton.addEventListener(`click`, (evt) => {
   evt.preventDefault();
-  showScreen(gameOne);
+  startNewGame();
+  showNextLevel();
 });
 
 rules.querySelector(`.back`).addEventListener(`click`, () => {
-  showScreen(greeting);
+  showScreen([greeting]);
 });
 
 export default rules;

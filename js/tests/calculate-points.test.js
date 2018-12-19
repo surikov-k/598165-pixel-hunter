@@ -1,13 +1,10 @@
 import {assert} from 'chai';
 import calculatePoints from '../calculate-points';
-import {TOTAL_LIVES, TOTAL_QUESTIONS} from '../calculate-points';
+import {TOTAL_QUESTIONS} from '../data/data';
 
-let answers = [];
+let answersExmpl = [];
 
 describe(`calculatePoints`, () => {
-  it(`should return a number`, () => {
-    assert.isNumber(calculatePoints([1, 2], 3));
-  });
 
   it(`should not accept anything except an array as the first argument`, () => {
     assert.throws(() => calculatePoints(`string`, 2), /First argument is not an array/);
@@ -18,65 +15,33 @@ describe(`calculatePoints`, () => {
     assert.throws(() => calculatePoints([], `string`), /Second argument is not a number/);
   });
 
-  it(`should accept the second argument between 0 and ${TOTAL_LIVES}`, () => {
-    assert.throws(() => calculatePoints([], -1), `Number of lives left is not between 0 and ${TOTAL_LIVES}`);
-    assert.throws(() => calculatePoints([], 6), `Number of lives left is not between 0 and ${TOTAL_LIVES}`);
+  it(`should return -1 if number of answers is less than ${TOTAL_QUESTIONS}`, () => {
+    answersExmpl = [`correct`, `correct`, `correct`];
+    assert.equal(calculatePoints(answersExmpl, 3), -1);
   });
 
-  it(`should return -1 if number of answers is less than ${TOTAL_QUESTIONS}`, () => {
-    answers = [
-      {correct: true, fast: false, slow: false},
-      {correct: true, fast: false, slow: false},
-      {correct: true, fast: false, slow: false}
-    ];
-    assert.equal(calculatePoints(answers, 3), -1);
+  it(`should return -1 if number of lives is less than 0`, () => {
+    assert.equal(calculatePoints(answersExmpl, -1), -1);
   });
 
   it(`should return 1150 if 10 questions are answered witn normal pace and 3 lives are left`, () => {
-    answers = [
-      {correct: true, fast: false, slow: false},
-      {correct: true, fast: false, slow: false},
-      {correct: true, fast: false, slow: false},
-      {correct: true, fast: false, slow: false},
-      {correct: true, fast: false, slow: false},
-      {correct: true, fast: false, slow: false},
-      {correct: true, fast: false, slow: false},
-      {correct: true, fast: false, slow: false},
-      {correct: true, fast: false, slow: false},
-      {correct: true, fast: false, slow: false}
+    answersExmpl = [
+      `correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`
     ];
-    assert.equal(calculatePoints(answers, 3), 1150);
+    assert.equal(calculatePoints(answersExmpl, 3).total, 1150);
   });
 
   it(`should return 1650 if 10 questions are answered witn high pace and 3 lives are left`, () => {
-    answers = [
-      {correct: true, fast: true, slow: false},
-      {correct: true, fast: true, slow: false},
-      {correct: true, fast: true, slow: false},
-      {correct: true, fast: true, slow: false},
-      {correct: true, fast: true, slow: false},
-      {correct: true, fast: true, slow: false},
-      {correct: true, fast: true, slow: false},
-      {correct: true, fast: true, slow: false},
-      {correct: true, fast: true, slow: false},
-      {correct: true, fast: true, slow: false}
+    answersExmpl = [
+      `fast`, `fast`, `fast`, `fast`, `fast`, `fast`, `fast`, `fast`, `fast`, `fast`
     ];
-    assert.equal(calculatePoints(answers, 3), 1650);
+    assert.equal(calculatePoints(answersExmpl, 3).total, 1650);
   });
 
-  it(`should return 200 if 7 questions are answered witn low pace and 3 lives are lost`, () => {
-    answers = [
-      {correct: false, fast: false, slow: true},
-      {correct: false, fast: false, slow: true},
-      {correct: false, fast: false, slow: true},
-      {correct: true, fast: false, slow: true},
-      {correct: true, fast: false, slow: true},
-      {correct: true, fast: false, slow: true},
-      {correct: true, fast: false, slow: true},
-      {correct: true, fast: false, slow: true},
-      {correct: true, fast: false, slow: true},
-      {correct: true, fast: false, slow: true}
+  it(`should return 350 if 7 questions are answered witn slow pace and 0 lives left`, () => {
+    answersExmpl = [
+      `slow`, `slow`, `slow`, `slow`, `slow`, `slow`, `slow`, `wrong`, `wrong`, `wrong`
     ];
-    assert.equal(calculatePoints(answers, 0), 200);
+    assert.equal(calculatePoints(answersExmpl, 0).total, 350);
   });
 });
