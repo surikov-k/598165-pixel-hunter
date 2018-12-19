@@ -1,4 +1,5 @@
 import die from './update-lives';
+import {getRandomFromArray} from './utils';
 
 export default (game) => {
   if (game.correctAnswers.join() !== game.playerAnswers.join()) {
@@ -9,7 +10,8 @@ export default (game) => {
       return false;
     }
   } else {
-    game.stats.push(`correct`);
+    const results = [`correct`, `fast`, `slow`];
+    game.stats.push(getRandomFromArray(results));
   }
   game.correctAnswers.length = 0;
   game.playerAnswers.length = 0;

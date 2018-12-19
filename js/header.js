@@ -1,6 +1,7 @@
 import {TOTAL_LIVES} from "./data/data";
 import {gameStatus} from './start-new-game';
-import {showScreen, getElementFromTemlate} from "./utils";
+import {getElementFromTemlate} from "./utils";
+import showScreen from './show-screen';
 import greeting from "./greeting";
 
 const headerTemplate = () => `<header class="header">

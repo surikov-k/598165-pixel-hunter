@@ -1,4 +1,5 @@
-import {getElementFromTemlate, showScreen} from "./utils.js";
+import {getElementFromTemlate} from "./utils.js";
+import showScreen from './show-screen';
 import greeting from "./greeting.js";
 import showNextLevel from "./show-next-level.js";
 import {startNewGame} from "./start-new-game";

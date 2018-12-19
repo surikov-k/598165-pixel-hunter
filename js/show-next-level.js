@@ -1,6 +1,6 @@
 import {LEVELS} from "./data/data";
 import {gameStatus} from './start-new-game';
-import {showScreen} from "./utils";
+import showScreen from './show-screen';
 import getHeader from "./header";
 import singleGame from "./single-game";
 import doubleGame from "./double-game";

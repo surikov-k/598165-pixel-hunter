@@ -1,4 +1,5 @@
-import {getElementFromTemlate, showScreen} from "./utils.js";
+import {getElementFromTemlate} from "./utils.js";
+import showScreen from './show-screen';
 import greeting from "./greeting.js";
 
 const template = ` <section class="intro">
