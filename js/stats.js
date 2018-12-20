@@ -96,7 +96,7 @@ export default () => {
   const stats = getElementFromTemlate(finalStatsTemplate);
 
   stats.querySelector(`.back`).addEventListener(`click`, () => {
-    showScreen([greeting]);
+    showScreen(greeting);
   });
   return stats;
 };

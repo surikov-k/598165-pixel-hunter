@@ -49,7 +49,7 @@ rulesButton.addEventListener(`click`, (evt) => {
 });
 
 rules.querySelector(`.back`).addEventListener(`click`, () => {
-  showScreen([greeting]);
+  showScreen(greeting);
 });
 
 export default rules;

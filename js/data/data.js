@@ -1,6 +1,3 @@
-import {getRandomFromArray} from '../utils';
-import {gameStatus} from '../start-new-game';
-
 export const TOTAL_QUESTIONS = 10;
 export const TOTAL_LIVES = 4;
 
@@ -9,7 +6,7 @@ export const FAST_BONUS = 50;
 export const LIVES_BONUS = 50;
 export const SLOW_PENALTY = 50;
 
-const images = {
+export const images = {
   paintings: [
     `https://k42.kn3.net/CF42609C8.jpg`,
     `https://k42.kn3.net/D2F0370D6.jpg`,
@@ -22,37 +19,6 @@ const images = {
   ]
 };
 
-const getImage = () => {
-  let url;
-  const isPhoto = Math.round(Math.random());
-  if (isPhoto) {
-    url = getRandomFromArray(images.photos);
-    gameStatus.correctAnswers.push(`photo`);
-  } else {
-    url = getRandomFromArray(images.paintings);
-    gameStatus.correctAnswers.push(`paint`);
-  }
-  return [url];
-};
-
-export const LEVELS = {
-  single: {
-    name: `single`,
-    task: `Угадай, фото или рисунок?`,
-    images: getImage
-  },
-  double: {
-    name: `double`,
-    task: `Угадайте для каждого изображения фото или рисунок?`,
-    images: getImage
-
-  },
-  triple: {
-    name: `triple`,
-    task: `Найдите рисунок среди изображений?`,
-    images: getImage
-  }
-};
 
 export const INITIAL_STATE = Object.freeze({
   levelNumber: 0,
