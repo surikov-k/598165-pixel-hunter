@@ -19,7 +19,7 @@ export default () => {
 
   gameInputs.forEach((it) => {
     it.addEventListener(`click`, (evt) => {
-      gameStatus.playerAnswers[0] = evt.target.value;
+      gameStatus.playerAnswers.push(evt.target.value);
       resetInputs();
       changeLevel(gameStatus);
       continueGame();

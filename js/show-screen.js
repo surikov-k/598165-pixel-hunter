@@ -6,7 +6,7 @@ const clearElement = (it) => {
   }
 };
 
-export default (elems) => {
+export default (...elems) => {
   clearElement(main);
   elems.forEach((it) => {
     main.appendChild(it);

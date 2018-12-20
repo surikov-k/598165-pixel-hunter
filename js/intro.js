@@ -10,6 +10,6 @@ const intro = getElementFromTemlate(template);
 const introAsterisk = intro.querySelector(`.intro__asterisk`);
 introAsterisk.addEventListener(`click`, (evt) => {
   evt.preventDefault();
-  showScreen([greeting]);
+  showScreen(greeting);
 });
 export default intro;

@@ -29,13 +29,15 @@ export default () => {
       levelStatus[evt.target.name] = true;
 
       if (evt.target.name === `question1`) {
-        gameStatus.playerAnswers[0] = evt.target.value;
+        levelStatus.question1 = evt.target.value;
       }
       if (evt.target.name === `question2`) {
-        gameStatus.playerAnswers[1] = evt.target.value;
+        levelStatus.question2 = evt.target.value;
       }
 
       if (levelStatus.question1 && levelStatus.question2) {
+        gameStatus.playerAnswers.push(levelStatus.question1);
+        gameStatus.playerAnswers.push(levelStatus.question2);
         resetInputs();
         changeLevel(gameStatus);
         continueGame();

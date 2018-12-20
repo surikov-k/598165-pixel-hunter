@@ -1,5 +1,8 @@
-import {getRandomFromArray} from '../utils';
-import {gameStatus} from '../start-new-game';
+import {getImagesForSingleGame, getImagesForDoubleGame, getImagesForTripleGame} from "../get-images";
+import singleGame from '../single-game';
+import doubleGame from '../double-game';
+import tripleGame from '../triple-game';
+
 
 export const TOTAL_QUESTIONS = 10;
 export const TOTAL_LIVES = 4;
@@ -9,7 +12,7 @@ export const FAST_BONUS = 50;
 export const LIVES_BONUS = 50;
 export const SLOW_PENALTY = 50;
 
-const images = {
+export const images = {
   paintings: [
     `https://k42.kn3.net/CF42609C8.jpg`,
     `https://k42.kn3.net/D2F0370D6.jpg`,
@@ -22,35 +25,22 @@ const images = {
   ]
 };
 
-const getImage = () => {
-  let url;
-  const isPhoto = Math.round(Math.random());
-  if (isPhoto) {
-    url = getRandomFromArray(images.photos);
-    gameStatus.correctAnswers.push(`photo`);
-  } else {
-    url = getRandomFromArray(images.paintings);
-    gameStatus.correctAnswers.push(`paint`);
-  }
-  return [url];
-};
-
 export const LEVELS = {
   single: {
-    name: `single`,
+    game: singleGame,
     task: `Угадай, фото или рисунок?`,
-    images: getImage
+    images: getImagesForSingleGame
   },
   double: {
-    name: `double`,
+    game: doubleGame,
     task: `Угадайте для каждого изображения фото или рисунок?`,
-    images: getImage
+    images: getImagesForDoubleGame
 
   },
   triple: {
-    name: `triple`,
+    game: tripleGame,
     task: `Найдите рисунок среди изображений?`,
-    images: getImage
+    images: getImagesForTripleGame
   }
 };
 

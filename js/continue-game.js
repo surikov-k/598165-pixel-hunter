@@ -11,7 +11,7 @@ export default () => {
   } else {
     answers.unshift({stats: gameStatus.stats.slice(), lives: gameStatus.lives});
 
-    showScreen([stats()]);
+    showScreen(stats());
   }
 };
 

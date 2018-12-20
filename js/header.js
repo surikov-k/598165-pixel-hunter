@@ -30,7 +30,7 @@ export default () => {
   const header = getElementFromTemlate(headerTemplate());
 
   header.querySelector(`.back`).addEventListener(`click`, () => {
-    showScreen([greeting]);
+    showScreen(greeting);
   });
   return header;
 };
