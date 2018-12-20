@@ -1,4 +1,4 @@
-import {LEVELS} from "./data/data";
+import {LEVELS} from "./data/game-types";
 import {gameStatus} from './start-new-game';
 import showScreen from './show-screen';
 import getHeader from "./header";

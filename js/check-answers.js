@@ -2,6 +2,7 @@ import die from './update-lives';
 import {getRandomFromArray} from './utils';
 
 export default (game) => {
+
   if (game.correctAnswers.join() !== game.playerAnswers.join()) {
     game.stats.push(`wrong`);
     try {

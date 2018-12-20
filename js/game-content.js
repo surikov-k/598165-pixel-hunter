@@ -1,5 +1,5 @@
 import levelStatistc from './level-statistic';
-import {LEVELS} from './data/data';
+import {LEVELS} from "./data/game-types";
 import {gameStatus} from './start-new-game';
 
 export default (gameContent) => {

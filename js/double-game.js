@@ -4,11 +4,19 @@ import {getElementFromTemlate} from "./utils.js";
 import changeLevel from './change-level';
 import continueGame from './continue-game';
 import {gameStatus} from './start-new-game';
+import changeGameType from "./change-game-type";
+import insertImage from './insert-image';
+import {LEVELS} from './data/game-types';
 
 
 export default () => {
   const doubleGameTemplate = getGameContent(getDoubleContent());
   const doubleGame = getElementFromTemlate(doubleGameTemplate);
+  const gameOptions = doubleGame.querySelectorAll(`.game__option`);
+  const images = LEVELS[gameStatus.levelType].images();
+  gameOptions.forEach((it, i) => {
+    insertImage(it, images[i], i);
+  });
   const gameInputs = doubleGame.querySelectorAll(`input[type="radio"]`);
 
   const levelStatus = {
@@ -40,6 +48,8 @@ export default () => {
         gameStatus.playerAnswers.push(levelStatus.question2);
         resetInputs();
         changeLevel(gameStatus);
+        gameStatus.levelType = changeGameType();
+
         continueGame();
       }
     });
